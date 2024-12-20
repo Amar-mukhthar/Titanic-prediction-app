@@ -1,1 +1,7 @@
-"streamlit\npandas\nmatplotlib\njoblib" 
+pandas==1.3.3
+numpy==1.21.2
+matplotlib==3.4.3
+seaborn==0.11.2
+scikit-learn==0.24.2
+joblib==1.0.1
+streamlit==0.84.0
