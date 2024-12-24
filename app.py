@@ -50,3 +50,7 @@ if st.button("Predict Survival"):
     st.pyplot(fig)
 
 
+# Know More Button
+if st.button("Know More"):
+    # Open the HTML file in a browser tab
+    st.markdown('<a href="know_more.html" target="_blank">Open Know More</a>', unsafe_allow_html=True)
