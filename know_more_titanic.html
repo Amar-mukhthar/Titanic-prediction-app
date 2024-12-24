@@ -2,15 +2,107 @@
 <html>
 <head>
     <title>About Titanic Survival Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
     <h1>Titanic Survival Prediction</h1>
-    <p>This project uses machine learning to predict the survival probability of a passenger on the Titanic based on factors such as their class, gender, age, and fare. The model was trained on the Titanic dataset and offers a probabilistic output for survival prediction.</p>
-    <h2>Key Features:</h2>
+    <p>This project uses a logistic regression model to predict the survival of Titanic passengers. Below is a detailed explanation of the dataset, data preprocessing, and the modeling process:</p>
+
+    <h2>Dataset Overview</h2>
+    <p>The dataset comes from the famous Titanic disaster and includes information about passengers such as:</p>
     <ul>
-        <li>Input customization for passenger details</li>
-        <li>Interactive survival prediction</li>
-        <li>Visualization of survival probabilities</li>
+        <li><strong>PassengerId:</strong> A unique ID for each passenger (dropped as it is irrelevant).</li>
+        <li><strong>Name:</strong> The passenger's name (dropped as it is not a useful predictor).</li>
+        <li><strong>Ticket:</strong> The ticket number (dropped due to low predictive value).</li>
+        <li><strong>Cabin:</strong> Cabin number (dropped due to high missing values).</li>
+        <li><strong>Pclass:</strong> Passenger class (1st, 2nd, 3rd).</li>
+        <li><strong>Sex:</strong> Gender of the passenger.</li>
+        <li><strong>Age:</strong> Passenger's age.</li>
+        <li><strong>SibSp:</strong> Number of siblings/spouses aboard.</li>
+        <li><strong>Parch:</strong> Number of parents/children aboard.</li>
+        <li><strong>Fare:</strong> Ticket fare.</li>
+        <li><strong>Embarked:</strong> Port of embarkation (C = Cherbourg, Q = Queenstown, S = Southampton).</li>
     </ul>
+
+    <h2>Data Cleaning and Preprocessing</h2>
+    <p>Before training the model, several data cleaning and preprocessing steps were performed:</p>
+    <ul>
+        <li>Removed columns with little to no predictive value such as <code>PassengerId</code>, <code>Name</code>, <code>Ticket</code>, and <code>Cabin</code>.</li>
+        <li>Handled missing values:
+            <ul>
+                <li><code>Age:</code> Filled missing values with the median age.</li>
+                <li><code>Embarked:</code> Filled missing values with the mode (most frequent value).</li>
+            </ul>
+        </li>
+        <li>Converted categorical variables to numerical:
+            <ul>
+                <li><code>Sex:</code> Encoded as 0 for female and 1 for male.</li>
+                <li><code>Embarked:</code> One-hot encoded.</li>
+            </ul>
+        </li>
+        <li>Removed outliers in <code>Fare</code> and <code>Age</code> using IQR (Interquartile Range).</li>
+        <li>Scaled numerical features (<code>Age</code>, <code>Fare</code>) for better model performance.</li>
+    </ul>
+
+    <h2>Modeling Process</h2>
+    <p>The logistic regression model was trained on the cleaned dataset. Key details include:</p>
+    <ul>
+        <li>Target variable: <code>Survived</code> (1 = Survived, 0 = Did not survive).</li>
+        <li>Feature columns used:
+            <ul>
+                <li><code>Pclass</code>: Passenger class.</li>
+                <li><code>Sex</code>: Gender.</li>
+                <li><code>Age</code>: Passenger's age.</li>
+                <li><code>SibSp</code>: Number of siblings/spouses aboard.</li>
+                <li><code>Parch</code>: Number of parents/children aboard.</li>
+                <li><code>Fare</code>: Ticket fare.</li>
+                <li><code>Embarked</code>: Encoded as separate columns (C, Q, S).</li>
+            </ul>
+        </li>
+        <li>Evaluation Metrics:
+            <ul>
+                <li>Accuracy: 78%</li>
+                <li>Precision, Recall, and F1-Score: Calculated for detailed performance.</li>
+                <li>ROC-AUC Score: 0.84 (indicates good model performance).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Results and Insights</h2>
+    <p>The model suggests that the following factors have a significant impact on survival:</p>
+    <ul>
+        <li><strong>Gender:</strong> Females had a higher survival probability.</li>
+        <li><strong>Passenger Class:</strong> Passengers in 1st class had a higher chance of survival.</li>
+        <li><strong>Fare:</strong> Passengers who paid higher fares were more likely to survive.</li>
+        <li><strong>Family Members Aboard:</strong> Having family aboard improved survival chances.</li>
+    </ul>
+
+    <h2>Future Improvements</h2>
+    <p>Possible improvements to the model include:</p>
+    <ul>
+        <li>Using more advanced models such as Random Forest or XGBoost for better predictions.</li>
+        <li>Incorporating additional features if available.</li>
+        <li>Fine-tuning hyperparameters to optimize performance.</li>
+    </ul>
+
+    <p>Feel free to explore the code and dataset for a deeper understanding of the project!</p>
 </body>
 </html>
