@@ -51,7 +51,7 @@ if st.button("Predict Survival"):
 
 
 if st.button("Know More"):
-    with open("know_more.html", "r") as f:
+    with open("know_more_titanic.html", "r") as f:
         html_content = f.read()
     st.markdown(html_content, unsafe_allow_html=True)
 
