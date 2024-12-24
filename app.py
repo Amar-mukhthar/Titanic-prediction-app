@@ -53,4 +53,4 @@ if st.button("Predict Survival"):
 # Know More Button
 if st.button("Know More"):
     # Open the HTML file in a browser tab
-    st.markdown('<a href="know_more.html" target="_blank">Open Know More</a>', unsafe_allow_html=True)
+    st.markdown('<a href="know_more_titanic.html" target="_blank">Open Know More</a>', unsafe_allow_html=True)
