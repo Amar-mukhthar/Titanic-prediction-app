@@ -67,8 +67,84 @@ if st.button("Predict Survival"):
     st.pyplot(fig)
 
 
+
+
 if st.button("Know More"):
-    with open("know_more_titanic.html", "r", encoding="utf-8") as f:
-        html_content = f.read()
-    st.markdown(html_content, unsafe_allow_html=True)
+    st.header("Dataset Overview")
+    st.write("""
+    The dataset comes from the famous Titanic disaster and includes information about passengers such as:
+    """)
+    st.markdown("""
+    - **PassengerId:** A unique ID for each passenger (dropped as it is irrelevant).
+    - **Name:** The passenger's name (dropped as it is not a useful predictor).
+    - **Ticket:** The ticket number (dropped due to low predictive value).
+    - **Cabin:** Cabin number (dropped due to high missing values).
+    - **Pclass:** Passenger class (1st, 2nd, 3rd).
+    - **Sex:** Gender of the passenger.
+    - **Age:** Passenger's age.
+    - **SibSp:** Number of siblings/spouses aboard.
+    - **Parch:** Number of parents/children aboard.
+    - **Fare:** Ticket fare.
+    - **Embarked:** Port of embarkation (C = Cherbourg, Q = Queenstown, S = Southampton).
+    """)
+
+    st.header("Data Cleaning and Preprocessing")
+    st.write("""
+    Before training the model, several data cleaning and preprocessing steps were performed:
+    """)
+    st.markdown("""
+    - Removed columns with little to no predictive value such as `PassengerId`, `Name`, `Ticket`, and `Cabin`.
+    - Handled missing values:
+      - `Age`: Filled missing values with the median age.
+      - `Embarked`: Filled missing values with the mode (most frequent value).
+    - Converted categorical variables to numerical:
+      - `Sex`: Encoded as 0 for female and 1 for male.
+      - `Embarked`: One-hot encoded.
+    - Removed outliers in `Fare` and `Age` using IQR (Interquartile Range).
+    - Scaled numerical features (`Age`, `Fare`) for better model performance.
+    """)
+
+    st.header("Modeling Process")
+    st.write("""
+    The logistic regression model was trained on the cleaned dataset. Key details include:
+    """)
+    st.markdown("""
+    - **Target variable:** `Survived` (1 = Survived, 0 = Did not survive).
+    - **Feature columns used:**
+      - `Pclass`: Passenger class.
+      - `Sex`: Gender.
+      - `Age`: Passenger's age.
+      - `SibSp`: Number of siblings/spouses aboard.
+      - `Parch`: Number of parents/children aboard.
+      - `Fare`: Ticket fare.
+      - `Embarked`: Encoded as separate columns (C, Q, S).
+    - **Evaluation Metrics:**
+      - Accuracy: 78%
+      - Precision, Recall, and F1-Score: Calculated for detailed performance.
+      - ROC-AUC Score: 0.84 (indicates good model performance).
+    """)
+
+    st.header("Results and Insights")
+    st.write("""
+    The model suggests that the following factors have a significant impact on survival:
+    """)
+    st.markdown("""
+    - **Gender:** Females had a higher survival probability.
+    - **Passenger Class:** Passengers in 1st class had a higher chance of survival.
+    - **Fare:** Passengers who paid higher fares were more likely to survive.
+    - **Family Members Aboard:** Having family aboard improved survival chances.
+    """)
+
+    st.header("Future Improvements")
+    st.write("""
+    Possible improvements to the model include:
+    """)
+    st.markdown("""
+    - Using more advanced models such as Random Forest or XGBoost for better predictions.
+    - Incorporating additional features if available.
+    - Fine-tuning hyperparameters to optimize performance.
+    """)
+
+    st.write("Feel free to explore the code and dataset for a deeper understanding of the project!")
+
 
